@@ -25,7 +25,7 @@ def get_db():
 
 @app.post('/blog',status_code=status.HTTP_201_CREATED, tags=['blogs'])
 def create_blog(blog:schemas.Blog,db : Session=Depends(get_db)):    # this is inside the blog if we execute uviorn main:app --reload this will not be executed hence we need to use uviorn blog.main:app --reload
-    new_blog = models.Blog(title=blog.title,body=blog.body)
+    new_blog = models.Blog(title=blog.title,body=blog.body, user_id=2)
     db.add(new_blog)
     db.commit()
     db.refresh(new_blog)

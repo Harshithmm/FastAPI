@@ -7,6 +7,9 @@ class Blog(Base):
     id= Column(Integer, primary_key=True, index=True)
     title= Column(String, index=True)
     body= Column(String, index=True)
+    user_id= Column(Integer, ForeignKey("users.id"))  #user table and id user.id
+
+    creator = relationship("User", back_populates="blogs")
 
 class User(Base):
     __tablename__ = "users"
@@ -14,3 +17,5 @@ class User(Base):
     name= Column(String)
     email= Column(String)
     password= Column(String)
+
+    blogs = relationship("Blog", back_populates="creator")
