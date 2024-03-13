@@ -8,7 +8,9 @@ from blog.database import SessionLocal, engine,get_db
 from .routers import blog
 from .routers import user
 
-app = FastAPI()
+app = FastAPI(
+    docs_url="/"
+)
 models.Base.metadata.create_all(bind=engine) # this will create the table in the database however if already created it will not create again and we can remove this line
 
 
