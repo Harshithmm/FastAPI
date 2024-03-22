@@ -5,15 +5,14 @@ from fastapi import FastAPI,Depends,status,Response,HTTPException
 from pydantic import BaseModel
 from . import models, schemas
 from blog.database import SessionLocal, engine,get_db
-from .routers import blog
-from .routers import user
+from .routers import blog, user, authentication
 
 app = FastAPI(
     docs_url="/"
 )
 models.Base.metadata.create_all(bind=engine) # this will create the table in the database however if already created it will not create again and we can remove this line
 
-
+app.include_router(authentication.router)
 app.include_router(blog.router)
 app.include_router(user.router)
 
